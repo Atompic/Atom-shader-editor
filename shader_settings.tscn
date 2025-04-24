@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://4spmsw5hle07"]
+
+[ext_resource type="Texture2D" uid="uid://bntjxven30qj7" path="res://icon.svg" id="1_phjje"]
+[ext_resource type="Script" uid="uid://qsb5m1bnc47s" path="res://shader_propperties_menu.gd" id="2_njbas"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(977.5, 323.5)
+scale = Vector2(2.61719, 4.82031)
+texture = ExtResource("1_phjje")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 828.447
+offset_top = 32.255
+offset_right = 1127.45
+offset_bottom = 601.82
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+script = ExtResource("2_njbas")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenuButton" type="MenuButton" parent="CanvasLayer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = false
+item_count = 1
+popup/item_0/id = 0

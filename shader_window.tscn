@@ -1,0 +1,168 @@
+[gd_scene load_steps=11 format=3 uid="uid://bnm8i08smir47"]
+
+[ext_resource type="Shader" uid="uid://tf1gq1ui4c4o" path="res://defualt.gdshader" id="1_la7gx"]
+[ext_resource type="Theme" uid="uid://dbueeb6m7a7ey" path="res://shader_editor.theme" id="2_1o6jr"]
+[ext_resource type="Script" uid="uid://cdrtf7c3xr7mf" path="res://Shader_edit.gd" id="3_m6q5f"]
+[ext_resource type="Script" uid="uid://cnqxxiem6e3ns" path="res://set_target_fps.gd" id="4_m6q5f"]
+[ext_resource type="Texture2D" uid="uid://bntjxven30qj7" path="res://icon.svg" id="4_u2n8f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7kfjr"]
+font_color = Color(0, 1, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_la7gx"]
+script/source = "extends Label
+
+const TIMER_LIMIT = 1.0
+var timer = 0.0
+var fps   = 60
+
+func _process(delta):
+	timer += delta
+	if timer > TIMER_LIMIT: # Prints every 2 seconds
+		timer = 0.0
+		fps = int(Engine.get_frames_per_second())
+		self.text = (\" fps: \" + str(fps) )
+		if (fps < 59.0) :
+			self.label_settings.font_color = Color.ORANGE
+		elif (fps < 29.0) :
+			self.label_settings.font_color = Color.RED
+		else:
+			self.label_settings.font_color = Color.GREEN
+
+
+func _on_line_edit_focus_entered() -> void:
+	self.visible = false
+
+
+func _on_line_edit_focus_exited() -> void:
+	self.visible = true
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2n8f"]
+shader = ExtResource("1_la7gx")
+
+[sub_resource type="SyntaxHighlighter" id="SyntaxHighlighter_u2n8f"]
+
+[sub_resource type="Theme" id="Theme_qbiqo"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+z_index = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.0
+offset_right = 41.0
+offset_bottom = 24.0
+grow_horizontal = 2
+text = " fps: 60"
+label_settings = SubResource("LabelSettings_7kfjr")
+horizontal_alignment = 1
+script = SubResource("GDScript_la7gx")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_u2n8f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer"]
+z_index = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_top = 2.0
+offset_right = 75.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme = ExtResource("2_1o6jr")
+placeholder_text = "target fps"
+alignment = 1
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_type = 2
+shortcut_keys_enabled = false
+caret_force_displayed = true
+script = ExtResource("4_m6q5f")
+
+[node name="CodeEdit" type="CodeEdit" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.00617284
+anchor_right = 0.046
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 33.0
+offset_right = 446.008
+offset_bottom = -6.00006
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_1o6jr")
+text = "shader_type canvas_item;
+
+
+
+void fragment() {
+	float hello = 9.+10.;
+	COLOR = vec4(UV,0.6,1.);
+
+
+}
+
+"
+emoji_menu_enabled = false
+minimap_width = 40
+syntax_highlighter = SubResource("SyntaxHighlighter_u2n8f")
+highlight_all_occurrences = true
+draw_tabs = true
+line_folding = true
+gutters_draw_line_numbers = true
+gutters_draw_fold_gutter = true
+code_completion_enabled = true
+auto_brace_completion_enabled = true
+auto_brace_completion_highlight_matching = true
+auto_brace_completion_pairs = {
+"(": ")",
+"[": "]",
+"{": "}"
+}
+script = ExtResource("3_m6q5f")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 2.5
+offset_left = 6.0
+offset_top = 2.0
+offset_right = -409.0
+offset_bottom = 157.0
+scale = Vector2(0.2, 0.2)
+
+[node name="Button" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+icon = ExtResource("4_u2n8f")
+flat = true
+
+[node name="Button2" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme = SubResource("Theme_qbiqo")
+action_mode = 0
+icon = ExtResource("4_u2n8f")
+flat = true
+
+[connection signal="focus_entered" from="CanvasLayer/LineEdit" to="CanvasLayer/LineEdit" method="_on_focus_entered"]
+[connection signal="text_submitted" from="CanvasLayer/LineEdit" to="CanvasLayer/LineEdit" method="_on_text_submitted"]
+[connection signal="text_changed" from="CanvasLayer/CodeEdit" to="CanvasLayer/CodeEdit" method="_on_text_changed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Button2" to="CanvasLayer/CodeEdit" method="_on_button_2_pressed"]

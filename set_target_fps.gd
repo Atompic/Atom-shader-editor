@@ -15,7 +15,6 @@ func _on_text_submitted(new_text: String) -> void:
 	Engine.max_fps = clamp(int(new_text),30,9999)
 	if(new_text == "0"):
 		Engine.max_fps = 0
-	print(new_text)
 	self.text = ""
 
 

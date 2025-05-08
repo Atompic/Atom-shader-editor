@@ -42,7 +42,11 @@ func _on_line_edit_focus_exited() -> void:
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u2n8f"]
 shader = ExtResource("1_la7gx")
 
-[sub_resource type="SyntaxHighlighter" id="SyntaxHighlighter_u2n8f"]
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_u2n8f"]
+number_color = Color(0.623529, 0.988235, 0.870588, 1)
+symbol_color = Color(0.670588, 0.788235, 1, 1)
+function_color = Color(0.317647, 0.639216, 0.909804, 1)
+member_variable_color = Color(0.933333, 0.415686, 0.494118, 1)
 
 [sub_resource type="Theme" id="Theme_qbiqo"]
 
@@ -93,7 +97,7 @@ shortcut_keys_enabled = false
 caret_force_displayed = true
 script = ExtResource("4_m6q5f")
 
-[node name="CodeEdit" type="CodeEdit" parent="CanvasLayer"]
+[node name="ShaderEdit" type="CodeEdit" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_top = 0.00617284
 anchor_right = 0.046
@@ -121,7 +125,7 @@ void fragment() {
 "
 emoji_menu_enabled = false
 minimap_width = 40
-syntax_highlighter = SubResource("SyntaxHighlighter_u2n8f")
+syntax_highlighter = SubResource("CodeHighlighter_u2n8f")
 highlight_all_occurrences = true
 draw_tabs = true
 line_folding = true
@@ -164,5 +168,5 @@ flat = true
 
 [connection signal="focus_entered" from="CanvasLayer/LineEdit" to="CanvasLayer/LineEdit" method="_on_focus_entered"]
 [connection signal="text_submitted" from="CanvasLayer/LineEdit" to="CanvasLayer/LineEdit" method="_on_text_submitted"]
-[connection signal="text_changed" from="CanvasLayer/CodeEdit" to="CanvasLayer/CodeEdit" method="_on_text_changed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/Button2" to="CanvasLayer/CodeEdit" method="_on_button_2_pressed"]
+[connection signal="text_changed" from="CanvasLayer/ShaderEdit" to="CanvasLayer/ShaderEdit" method="_on_text_changed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Button2" to="CanvasLayer/ShaderEdit" method="_on_button_2_pressed"]

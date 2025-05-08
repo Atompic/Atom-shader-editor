@@ -43,7 +43,7 @@ func _on_line_edit_focus_exited() -> void:
 shader = ExtResource("1_la7gx")
 
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_u2n8f"]
-number_color = Color(0.623529, 0.988235, 0.870588, 1)
+number_color = Color(0.00392157, 0.988235, 0.870588, 1)
 symbol_color = Color(0.670588, 0.788235, 1, 1)
 function_color = Color(0.317647, 0.639216, 0.909804, 1)
 member_variable_color = Color(0.933333, 0.415686, 0.494118, 1)

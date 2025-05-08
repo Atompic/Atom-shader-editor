@@ -15,9 +15,9 @@ func _ready() -> void:
 	code_completion_enabled = true
 	
 	var key_words = {
-	"UV": Color(0.78,1.,0.92),
-	"COLOR": Color(0.78,1.,0.92),
-	"NORMAL": Color(0.78,1.,0.92),
+	"UV": Color(0.90, 0.60, 0.60),
+	"COLOR": Color(0.90, 0.60, 0.60),
+	"NORMAL": Color(0.90, 0.60, 0.60),
 	
 	"float": Color.ORANGE,
 	"int": Color.ORANGE,

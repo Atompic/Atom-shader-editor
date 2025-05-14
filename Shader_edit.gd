@@ -1,14 +1,17 @@
 extends CodeEdit
 
-@onready var color_rect: ColorRect = $"../ColorRect"
+@onready var color_rect: ColorRect = $"../../ColorRect"
 @onready var code_edit: CodeEdit = $"."
-@onready var button_2: Button = $"../HBoxContainer/Button2"
+@onready var button_2: Button = $"../../HBoxContainer/Button2"
+@onready var container: HSplitContainer = $".."
+
 
 
 
 var minimize: bool = false
 var pos = Vector2(6.0,37.0)
-
+var pointer_pos = Vector2(0.,0.);
+var sizeing: bool = false
 
 func _ready() -> void:
 	code_edit.text = (color_rect.material.shader.code) 
@@ -52,9 +55,6 @@ func _on_button_2_pressed() -> void:
 
 func _process(delta: float) -> void:
 	
-	
-
-
-	scale = scale.lerp(Vector2(float(!minimize),float(!minimize)),(delta+0.0085) * 2.0)
-	position = position.lerp(pos,(delta+0.01) * 2.02)
+	container.scale = container.scale.lerp(Vector2(float(!minimize),float(!minimize)),(delta) * 10.0)
+	container.position = container.position.lerp(pos,(delta) * 10.0)
 	

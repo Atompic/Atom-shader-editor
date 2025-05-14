@@ -12,7 +12,7 @@ func _process(delta):
 		self.placeholder_text = ("fps: " + str(fps) + " / " + str(Engine.max_fps))
 	
 func _on_text_submitted(new_text: String) -> void:
-	Engine.max_fps = clamp(int(new_text),30,9999)
+	Engine.max_fps = clamp(int(new_text),10,9999)
 	if(new_text == "0"):
 		Engine.max_fps = 0
 	self.text = ""
